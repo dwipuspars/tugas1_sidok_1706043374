@@ -1,7 +1,9 @@
-# Tugas 1 APAP SIDOK
+# Tugas 1 - APAP
 
-## Authors
+# SIDOK
+Repository untuk tugas 1 APAP dengan kode SIDOK
 
-* **<dwipuspa.ramadhanti>** - *<1706043374>* - *<C>*
+https://github.com/dwipuspars/apap-sidok.git
 
----
+## Contributor
+Dwipuspa Ramadhanti Santoso - 1706043374
