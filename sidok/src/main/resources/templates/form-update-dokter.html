@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tambah Restoran</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<h2 style="text-align:center;"> Ubah Dokter </h2>
+<div class="card">
+    <div class="card-header text-white bg-dark mb-3">
+        Tambah Dokter
+    </div>
+
+    <div class="card-body">
+        <form th:action="@{/dokter/update/{idDokter}(idDokter=${dokter.idDokter})}" th:object="${dokter}" method="POST">
+            <div class="form-group">
+                <label for="inputNama">Nama</label>
+                <input type="text" class="form-control" id="inputNama" name="nama" placeholder="Masukkan Nama" th:field="*{nama}">
+            </div>
+            <div class="form-group">
+                <label for="inputNIK">NIK</label>
+                <input type="number" class="form-control" id="inputNIK" name="nama" maxlength="10" th:field="*{nik}" readonly>
+                <small id="passwordHelpBlock" class="form-text text-muted">
+                    NIK harus berupa angka sebanyak 10 karakter
+                </small>
+            </div>
+            <div class="form-group">
+                <label for="inputTanggalLahir">Tanggal Lahir</label>
+                <input type="date" class="form-control" id="inputTanggalLahir" name = "birthdate" th:field="*{birthdate}">
+            </div>
+            <div class="form-group">
+                <label for="inputTempatLahir">Tempat Lahir</label>
+                <input type="text" class="form-control" id="inputTempatLahir" name="tempatLahir" placeholder="Masukkan Tempat Lahir" th:field="*{tempatLahir}">
+            </div>
+            <div class="form-group">
+                <label>Jenis Kelamin</label>
+                <select class="custom-select" name="jenisKelamin" th:field="*{jenisKelamin}">
+                    <!--                    <option selected value="">Pilih Jenis Kelamin</option>-->
+                    <option value="1">Laki-laki</option>
+                    <option value="2">Perempuan</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 col-form-label">Spesialisasi</label>
+                <select class="custom-select" th:field="*{listSpesialisasi}">
+                    <!--                    <option selected value="">Pilih Spesialisasi</option>-->
+                    <option th:each="spesialisasi : ${spesialisasiList}"
+                            th:text="${spesialisasi.nama}"
+                            th:value="${spesialisasi.idSpesialisasi}"></option>
+                </select>
+            </div>
+            <button class="btn btn-primary" type="submit">Tambah Dokter</button>
+        </form>
+
+
+    </div>
+
+</div>
+
+</div>
+
+</body>
+
+</html>
