@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tambah Poli</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<h2 style="text-align:center;"> Tambah Poli r </h2>
+<div class="card">
+    <div class="card-header text-white bg-dark mb-3">
+        Masukkan Data Baru Poli
+    </div>
+
+    <div class="card-body">
+        <form th:action="@{/poli/tambah}" th:object="${poli}" method="POST">
+            <div class="form-group">
+                <label for="inputNama">Nama</label>
+                <input type="text" class="form-control" id="inputNama" name="nama" placeholder="Masukkan Nama" th:field="*{nama}">
+            </div>
+            <div class="form-group">
+                <label for="inputNama">Lokasi</label>
+                <input type="text" class="form-control" id="inputLokasi" name="lokasi" placeholder="Masukkan Lokasi" th:field="*{lokasi}">
+            </div>
+            <button class="btn btn-primary" type="submit">Tambah Poli</button>
+        </form>
+
+
+    </div>
+
+</div>
+
+</div>
+
+</body>
+
+</html>

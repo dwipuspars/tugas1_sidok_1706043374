@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cari Dokter</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+    <nav th:replace="fragments/fragment :: navbar"></nav>
+    <br>
+    <h2 style="text-align:center;"> Cari Dokter yang Paling Banyak Bertugas di Suatu Poli </h2>
+    <br>
+    <div style="margin-right: 400px; margin-left: 400px">
+        <form th:action="@{/dokter/cari/tugas-terbanyak}" th:object="${dokter}" method="POST">
+            <div class="form-group">
+                <label class="col-sm-2 col-form-label">Poli</label>
+                <select class="custom-select" name="idPoli">
+                    <option selected value="">--Pilih Poli--</option>
+                    <option th:each="poli : ${listPoli}"
+                            th:text="${poli.nama}"
+                            th:value="${poli.idPoli}"></option>
+                </select>
+            </div>
+            <button class="btn btn-primary" type="submit" name="save">Cari Dokter</button>
+        </form>
+    </div>
+
+    <br>
+    
+    <div style="margin-right: 300px; margin-left: 300px">
+        <div class="card">
+            <div class="card-header text-white bg-dark mb-3">
+                Detail Dokter
+            </div>
+
+            <div class="card-body">
+                <div th:if="${dokterTerbanyak.size()} == 0"> Tidak ada dokter yang bertugas.</div>
+                <div th:each="dokter : ${dokterTerbanyak}">
+                    <h5 th:text="'Nama: ' + ${dokter.nama}"></h5>
+                    <h5 th:text="'NIP: ' + ${dokter.nip}"></h5>
+                    <h5 th:text="'NIK: ' + ${dokter.nik}"></h5>
+                    <h5 th:text="'Tempat Lahir: ' + ${dokter.tempatLahir}"></h5>
+                    <h5 th:text="'Tanggal Lahir: ' + ${dokter.birthdate}"></h5>
+                    <h5 th:if="${dokter.jenisKelamin} == 1">Jenis Kelamin: Laki-laki</h5>
+                    <h5 th:unless="${dokter.jenisKelamin} == 1">Jenis Kelamin: Perempuan</h5>
+                    <h5 th:text="'Spesialisasi: '"></h5>
+                    <h5>
+                        <ul th:each="spesialisasi, iterationStatus : ${dokter.listSpesialisasi}">
+                            <li th:text="${spesialisasi.nama}"></li>
+                        </ul>
+                    </h5>
+                    <br>
+                    <br>
+                </div>
+
+            </div>
+
+        </div>
+        <br>
+        <a th:href="@{/}" class="btn btn-primary">Kembali ke Beranda</a>
+    </div>
+
+
+</div>
+
+</div>
+
+</body>
+
+</html>

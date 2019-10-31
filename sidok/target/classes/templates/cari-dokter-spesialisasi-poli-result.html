@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cari Dokter</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<br>
+<h2 style="text-align:center;"> Cari Dokter Berdasarkan Spesialisasi dan Poli Tertentu </h2>
+<br>
+<div style="margin-right: 400px; margin-left: 400px">
+    <form th:action="@{/cari}" th:object="${dokter}" method="POST">
+        <div class="form-group">
+            <label class="col-sm-2 col-form-label">Spesialisasi</label>
+            <select class="custom-select" name="idSpesialisasi">
+                <option selected value="">--Pilih Spesialisasi--</option>
+                <option th:each="spesialisasi : ${listSpesialisasi}"
+                        th:text="${spesialisasi.nama}"
+                        th:value="${spesialisasi.idSpesialisasi}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 col-form-label">Poli</label>
+            <select class="custom-select" name="idPoli">
+                <option selected value="">--Pilih Poli--</option>
+                <option th:each="poli : ${listPoli}"
+                        th:text="${poli.nama}"
+                        th:value="${poli.idPoli}"></option>
+            </select>
+        </div>
+        <button class="btn btn-primary" type="submit" name="save">Cari Dokter</button>
+    </form>
+</div>
+
+<br>
+    <h4 th:if="${listDokter.size()} == 0" style="text-align: center">Tidak ada dokter dengan spesifikasi tersebut.</h4>
+    <div th:unless="${listDokter.size()} == 0">
+        <div style="margin-right: 50px; margin-left: 50px">
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">No</th>
+                <th scope="col">Nama</th>
+                <th scope="col">NIP</th>
+                <th scope="col">NIK</th>
+                <th scope="col">Jenis Kelamin</th>
+                <th scope="col">Spesialisasi</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="dokter, iterationStatus : ${listDokter}">
+                <td th:text="${iterationStatus.count}" ></a></td>
+                <td><a th:href="@{/dokter/detail/} + ${dokter.nik}" th:text="${dokter.nama}"></td>
+                <td th:text="${dokter.nip}"></td>
+                <td th:text="${dokter.nik}"></td>
+                <td th:if="${dokter.jenisKelamin} == 1">Laki-laki</td>
+                <td th:unless="${dokter.jenisKelamin} == 1">Perempuan</td>
+                <td>
+                    <ul th:each="spesialisasi, iterationStatus : ${dokter.listSpesialisasi}">
+                        <li th:text="${spesialisasi.nama}"></li>
+                    </ul>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+</body>
+
+</html>

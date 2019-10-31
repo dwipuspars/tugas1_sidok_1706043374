@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cari Dokter</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<br>
+<h2 style="text-align:center;"> Cari Dokter Berdasarkan Spesialisasi dan Poli Tertentu </h2>
+<br>
+<div style="margin-right: 400px; margin-left: 400px">
+<form th:action="@{/cari}" th:object="${dokter}" method="POST">
+    <div class="form-group">
+        <label class="col-sm-2 col-form-label">Spesialisasi</label>
+        <select class="custom-select" name="idSpesialisasi">
+            <option selected value="">--Pilih Spesialisasi--</option>
+            <option th:each="spesialisasi : ${listSpesialisasi}"
+                    th:text="${spesialisasi.nama}"
+                    th:value="${spesialisasi.idSpesialisasi}"></option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 col-form-label">Poli</label>
+        <select class="custom-select" name="idPoli">
+            <option selected value="">--Pilih Poli--</option>
+            <option th:each="poli : ${listPoli}"
+                    th:text="${poli.nama}"
+                    th:value="${poli.idPoli}"></option>
+        </select>
+    </div>
+    <button class="btn btn-primary" type="submit" name="save">Cari Dokter</button>
+</form>
+</div>
+</div>
+
+</div>
+
+</body>
+
+</html>

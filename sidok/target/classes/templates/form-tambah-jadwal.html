@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tambah Jadwal Dokter</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<br>
+<h2 style="text-align:center;"> Tambah Jadwal Jaga Dokter </h2>
+<br>
+<div style="margin-right: 400px; margin-left: 400px">
+    <div class="card">
+        <div class="card-header text-white bg-dark mb-3">
+            Masukkan Data Jadwal
+        </div>
+
+        <div class="card-body">
+            <form th:action="@{/jadwal/tambah/{nip}(nip=${dokter.nip})}" th:object="${jadwal}" method="POST">
+                <div class="form-group">
+                    <label for="inputNama">Dokter</label>
+                    <input type="text" class="form-control" id="inputNama" name="nama" th:value="${dokter.nama}" readonly>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 col-form-label">Poli</label>
+                    <select class="custom-select" th:field="*{poli}">
+                        <option selected value="">--Pilih Poli--</option>
+                        <option th:each="poli : ${listPoli}"
+                                th:text="${poli.nama}"
+                                th:value="${poli.idPoli}"></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 col-form-label">Hari</label>
+                    <select class="custom-select" th:field="*{hari}">
+                        <option selected value="">--Pilih Hari--</option>
+                        <option th:value="Senin">Senin</option>
+                        <option th:value="Selasa">Selasa</option>
+                        <option th:value="Rabu">Rabu</option>
+                        <option th:value="Kamis">Kamis</option>
+                        <option th:value="Jumat">Jumat</option>
+                        <option th:value="Sabtu">Sabtu</option>
+                        <option th:value="Minggu">Minggu</option>
+                    </select>
+                </div>
+                <button class="btn btn-primary" type="submit">Tambah Jadwal</button>
+            </form>
+
+            <br>
+            <br>
+
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Nama</th>
+                    <th scope="col">Hari</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="listDokter, iterationStatus : ${listJadwalJaga}">
+                    <td th:text="${iterationStatus.count}" ></a></td>
+                    <td th:text="${listDokter.poli.nama}"></td>
+                    <td th:text="${listDokter.hari}"></td>
+                </tr>
+            </table>
+
+
+        </div>
+
+    </div>
+
+</div>
+</div>
+
+</body>
+
+</html>
