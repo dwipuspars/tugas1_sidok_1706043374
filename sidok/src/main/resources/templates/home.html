@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+    <nav th:replace="fragments/fragment :: navbar"></nav>
+    <br>
+    <h2 style="text-align:center;"> Sistem Informasi Dokter </h2>
+    <br>
+    <div style="margin-right: 10px; margin-left: 10px">
+        <div class="card">
+            <div class="card-header text-white bg-dark mb-3">
+                Daftar Dokter
+            </div>
+
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead class="thead">
+                    <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">Nama</th>
+                        <th scope="col">NIP</th>
+                        <th scope="col">NIK</th>
+                        <th scope="col">Jenis Kelamin</th>
+                        <th scope="col">Spesialisasi</th>
+                        <th scope="col=sm=6"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="dokter, iterationStatus : ${dokterList}">
+                        <td th:text="${iterationStatus.count}" ></a></td>
+                        <!--                        <td><a th:href="@{/dokter/detail}" th:text="${dokter.nama}" th:method="GET"></td>-->
+                        <td><a th:href="@{/dokter/detail/} + ${dokter.nik}" th:text="${dokter.nama}"></td>
+                        <td th:text="${dokter.nip}"></td>
+                        <td th:text="${dokter.nik}"></td>
+                        <td th:if="${dokter.jenisKelamin} == 1">Laki-laki</td>
+                        <td th:unless="${dokter.jenisKelamin} == 1">Perempuan</td>
+                        <td>
+                            <ul th:each="spesialisasi, iterationStatus : ${dokter.listSpesialisasi}">
+                                <li th:text="${spesialisasi.nama}"></li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a th:href="@{/jadwal/tambah/} + ${dokter.nip}" class="btn btn-primary">Tambah Jadwal</a>
+                            <a th:href="@{/dokter/update/} + ${dokter.idDokter}" class="btn btn-dark">Ubah</a>
+                            <a th:href="@{/dokter/delete/} + ${dokter.idDokter}" class="btn btn-danger">Hapus</a>
+                        </td>
+                    </tr>
+                </table>
+
+                <a th:href="@{/dokter/tambah}" class="btn btn-dark">
+                    Tambah Dokter
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

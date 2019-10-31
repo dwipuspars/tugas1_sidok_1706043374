@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Poli</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<h2 style="text-align:center;"> Sistem Informasi Dokter </h2>
+<div style="margin-right: 10px; margin-left: 10px">
+    <div class="card">
+        <div class="card-header text-white bg-dark mb-3">
+            Daftar Poli
+        </div>
+
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead class="thead">
+                <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Nama</th>
+                    <th scope="col">Lokasi</th>
+                    <th scope="col=sm=6"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="poli, iterationStatus : ${poliList}">
+                    <td th:text="${iterationStatus.count}" ></a></td>
+                    <!--                        <td><a th:href="@{/dokter/detail}" th:text="${dokter.nama}" th:method="GET"></td>-->
+                    <td><a th:href="@{/poli/detail/} + ${poli.idPoli}" th:text="${poli.nama}"></td>
+                    <td th:text="${poli.lokasi}"></td>
+                    <td>
+                        <a th:href="@{/poli/update/} + ${poli.idPoli}" class="btn btn-dark">Ubah</a>
+                        <a th:href="@{/poli/delete/} + ${poli.idPoli}" class="btn btn-danger">Hapus</a>
+                    </td>
+                </tr>
+            </table>
+
+            <a th:href="@{/poli/tambah}" class="btn btn-dark">
+                Tambah Poli
+            </a>
+        </div>
+
+    </div>
+</div>
+
+</body>
+
+</html>

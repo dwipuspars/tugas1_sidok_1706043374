@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeLeaf.org">
+
+<head>
+    <title>Tambah Jadwal Dokter</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<h2 th:text="'Berhasil menambahkan jadwal jaga untuk Dokter ' + ${namaDokter} + ' di ' + ${namaPoli} + ' pada hari ' + ${hariJadwal} + '.'"></h2>
+<a th:href="@{/}" class="btn btn-primary">Kembali ke Beranda</a>
+</body>
+</html>
