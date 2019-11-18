@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Dokter</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<h2 style="text-align:center;"> Data berhasil diubah! </h2>
+<div class="card">
+    <div class="card-header text-white bg-dark mb-3">
+        Detail Dokter
+    </div>
+
+    <div class="card-body">
+
+        <h3 th:text="'Nama: ' + ${dokter.nama}"></h3>
+        <h3 th:text="'NIP: ' + ${dokter.nip}"></h3>
+        <h3 th:text="'NIK: ' + ${dokter.nik}"></h3>
+        <h3 th:text="'Tempat Lahir: ' + ${dokter.tempatLahir}"></h3>
+        <h3 th:text="'Tanggal Lahir: ' + ${dokter.birthdate}"></h3>
+        <h3 th:text="'Jenis Kelamin: '+ ${dokter.jenisKelamin} == 1 ? 'Laki-laki' : 'Perempuan'"></h3>
+        <h3 th:text="'Jenis Kelamin: '+ ${dokter.listSpesialisasi[0]}></h3>
+        <a th:href="@{/}" class="btn btn-dark">Ubah</a>
+        <a th:href="@{/}" class="btn btn-danger">Hapus</a>
+    </div>
+
+</div>
+
+</body>
+
+</html>
